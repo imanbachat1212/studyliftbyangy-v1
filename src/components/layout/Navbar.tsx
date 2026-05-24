@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react'
-import { GraduationCap, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const navLinks = [
@@ -45,7 +45,11 @@ export default function Navbar() {
         <div className="relative max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 cursor-pointer z-10">
-            <GraduationCap className="w-8 h-8 text-gold" />
+            <img
+              src="/images/posts/studyliftbyangy-logo.jpg"
+              alt="StudyLift by Angy"
+              className="h-10 w-10 rounded-full object-cover"
+            />
             <div>
               <p className="font-display text-lg font-bold text-cream leading-none">StudyLift</p>
               <p className="font-body text-[10px] text-gold tracking-widest uppercase leading-none">
@@ -118,7 +122,11 @@ export default function Navbar() {
             >
               <div className="flex items-center justify-between p-6 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <GraduationCap className="w-6 h-6 text-gold" />
+                  <img
+                    src="/images/posts/studyliftbyangy-logo.jpg"
+                    alt="StudyLift by Angy"
+                    className="h-8 w-8 rounded-full object-cover"
+                  />
                   <span className="font-display text-cream font-bold">StudyLift</span>
                 </div>
                 <button

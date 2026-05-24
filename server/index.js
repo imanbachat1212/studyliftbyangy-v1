@@ -9,7 +9,6 @@ app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' }))
 app.use(express.json())
 
 app.use('/api/contact', contactRouter)
-
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }))
 
 app.listen(PORT, () => {
