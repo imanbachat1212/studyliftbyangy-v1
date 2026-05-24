@@ -1,11 +1,12 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'motion/react'
+import { Users2, Star, Layers, Clock } from 'lucide-react'
 
 const stats = [
-  { value: 50, suffix: '+', label: 'Students Helped' },
-  { value: 98, suffix: '%', label: 'Satisfaction Rate' },
-  { value: 7, suffix: '+', label: 'Services Offered' },
-  { value: 3, suffix: ' Yrs', label: 'Experience' },
+  { value: 50, suffix: '+', label: 'Students Helped', icon: <Users2 className="w-5 h-5" />, iconBg: 'bg-navy/10', iconColor: 'text-navy' },
+  { value: 98, suffix: '%', label: 'Satisfaction Rate', icon: <Star className="w-5 h-5" />, iconBg: 'bg-gold/10', iconColor: 'text-gold' },
+  { value: 7, suffix: '+', label: 'Services Offered', icon: <Layers className="w-5 h-5" />, iconBg: 'bg-teal/10', iconColor: 'text-teal' },
+  { value: 3, suffix: ' Yrs', label: 'Experience', icon: <Clock className="w-5 h-5" />, iconBg: 'bg-navy/10', iconColor: 'text-navy' },
 ]
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
@@ -63,8 +64,11 @@ export default function Stats() {
             <motion.div
               key={stat.label}
               variants={fadeUp}
-              className="bg-white rounded-2xl p-6 border-l-4 border-gold shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="bg-white rounded-2xl p-6 border-l-4 border-gold shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center text-center"
             >
+              <div className={`w-11 h-11 rounded-xl ${stat.iconBg} ${stat.iconColor} flex items-center justify-center mb-4`}>
+                {stat.icon}
+              </div>
               <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               <p className="font-body text-dark/60 text-sm mt-2 leading-snug">{stat.label}</p>
             </motion.div>

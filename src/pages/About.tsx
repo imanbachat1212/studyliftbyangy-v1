@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'motion/react'
 import { ShieldCheck, Clock, Star, Target } from 'lucide-react'
+import Stats from '../components/home/Stats'
+import Process from '../components/home/Process'
 
 const words = "Hi, I'm Angy — Your Academic Partner".split(' ')
 
@@ -83,6 +85,10 @@ export default function About() {
           </motion.div>
         </div>
       </section>
+
+      <Stats />
+
+      <Process />
 
       {/* Commitment grid */}
       <section className="py-20 bg-white">

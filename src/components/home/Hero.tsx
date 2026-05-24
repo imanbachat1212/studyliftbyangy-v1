@@ -78,14 +78,12 @@ export default function Hero() {
           className="flex items-center justify-center md:justify-start gap-4 mt-10"
         >
           {[
-            { code: 'A', label: 'English', color: 'bg-gold' },
-            { code: 'é', label: 'Français', color: 'bg-teal' },
-            { code: 'غ', label: 'العربية', color: 'bg-navy border border-white/20' },
+            { flag: '🇬🇧', label: 'English' },
+            { flag: '🇫🇷', label: 'Français' },
+            { flag: '🇦🇪', label: 'العربية' },
           ].map((lang) => (
             <span key={lang.label} className="flex items-center gap-1.5 font-body text-xs text-cream/60">
-              <span className={`w-5 h-5 rounded-full ${lang.color} flex items-center justify-center text-white text-[10px] font-bold`}>
-                {lang.code}
-              </span>
+              <span className="text-base leading-none">{lang.flag}</span>
               {lang.label}
             </span>
           ))}

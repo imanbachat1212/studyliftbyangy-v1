@@ -56,10 +56,27 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
   )
 }
 
+function ScrollToHash() {
+  const location = useLocation()
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '')
+      // Delay lets the page finish rendering/animating before scrolling
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+      }, 450)
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
+  }, [location])
+  return null
+}
+
 function AppContent() {
   const location = useLocation()
   return (
     <>
+      <ScrollToHash />
       <CustomCursor />
       <Navbar />
       <PageWrapper key={location.pathname}>

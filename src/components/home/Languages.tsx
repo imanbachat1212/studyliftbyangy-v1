@@ -2,25 +2,22 @@ import { motion } from 'motion/react'
 
 const languages = [
   {
-    code: 'A',
+    flag: '🇬🇧',
     name: 'ENGLISH',
     tagline: 'Clear communication. Quality support. Real results.',
-    color: '#1B2A5E',
-    bg: 'bg-navy',
+    color: '#C9973A',
   },
   {
-    code: 'é',
+    flag: '🇫🇷',
     name: 'FRANÇAIS',
     tagline: 'Une communication claire. Un accompagnement de qualité. Des résultats concrets.',
     color: '#C9973A',
-    bg: 'bg-gold',
   },
   {
-    code: 'غ',
+    flag: '🇦🇪',
     name: 'العربية',
     tagline: 'تواصل واضح. دعم عالي الجودة. نتائج حقيقية.',
     color: '#2D8A8A',
-    bg: 'bg-teal',
     rtl: true,
   },
 ]
@@ -92,17 +89,15 @@ export default function Languages() {
               whileHover={{ y: -4 }}
               className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 flex flex-col items-center text-center gap-4 cursor-default"
             >
-              {/* Avatar badge */}
-              <div
-                className={`w-14 h-14 rounded-full ${lang.bg} flex items-center justify-center shadow-lg`}
-              >
-                <span className="text-white font-display font-bold text-xl">{lang.code}</span>
+              {/* Flag badge */}
+              <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center shadow-lg text-4xl">
+                {lang.flag}
               </div>
 
               <div>
                 <h3
                   className="font-body font-bold text-lg tracking-wider mb-3"
-                  style={{ color: lang.color === '#1B2A5E' ? '#C9973A' : lang.color }}
+                  style={{ color: lang.color }}
                 >
                   {lang.name}
                 </h3>

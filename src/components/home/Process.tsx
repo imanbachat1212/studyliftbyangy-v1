@@ -1,12 +1,13 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
+import { Send, Phone, ClipboardList, Users, Trophy } from 'lucide-react'
 
 const steps = [
-  { number: '01', title: 'Reach Out', desc: 'Send a message via WhatsApp or contact form' },
-  { number: '02', title: 'Free Consultation', desc: 'Discuss your needs with a quick free session' },
-  { number: '03', title: 'Tailored Plan', desc: 'Get a plan built around your goals & deadline' },
-  { number: '04', title: 'Work Together', desc: 'Collaborate with expert guidance at every step' },
-  { number: '05', title: 'Submit with Confidence', desc: 'Deliver polished, submission-ready work' },
+  { number: '01', icon: <Send className="w-6 h-6" />, title: 'Reach Out', desc: 'Send a message via WhatsApp or contact form' },
+  { number: '02', icon: <Phone className="w-6 h-6" />, title: 'Free Consultation', desc: 'Discuss your needs with a quick free session' },
+  { number: '03', icon: <ClipboardList className="w-6 h-6" />, title: 'Tailored Plan', desc: 'Get a plan built around your goals & deadline' },
+  { number: '04', icon: <Users className="w-6 h-6" />, title: 'Work Together', desc: 'Collaborate with expert guidance at every step' },
+  { number: '05', icon: <Trophy className="w-6 h-6" />, title: 'Submit with Confidence', desc: 'Deliver polished, submission-ready work' },
 ]
 
 const fadeUp = {
@@ -64,8 +65,8 @@ export default function Process() {
                   variants={fadeUp}
                   className="flex flex-col items-center text-center"
                 >
-                  <div className="w-16 h-16 rounded-full bg-navy border-4 border-gold flex items-center justify-center mb-4 relative z-10">
-                    <span className="font-display text-gold font-bold text-lg">{step.number}</span>
+                  <div className="w-16 h-16 rounded-full bg-navy border-4 border-gold flex items-center justify-center mb-4 relative z-10 text-gold">
+                    {step.icon}
                   </div>
                   <h3 className="font-display font-semibold text-navy text-base mb-2">{step.title}</h3>
                   <p className="font-body text-dark/60 text-xs leading-relaxed">{step.desc}</p>
@@ -101,10 +102,12 @@ export default function Process() {
                     <div className="w-2 h-2 rounded-full bg-navy" />
                   </div>
                   <div className="pl-2">
-                    <span className="font-body text-gold text-xs font-bold tracking-widest">
-                      {step.number}
-                    </span>
-                    <h3 className="font-display font-semibold text-navy text-lg mb-1">{step.title}</h3>
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-8 h-8 rounded-lg bg-navy text-gold flex items-center justify-center flex-shrink-0">
+                        {step.icon}
+                      </div>
+                      <h3 className="font-display font-semibold text-navy text-lg">{step.title}</h3>
+                    </div>
                     <p className="font-body text-dark/60 text-sm leading-relaxed">{step.desc}</p>
                   </div>
                 </motion.div>

@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { Quote } from 'lucide-react'
+import { Quote, Star } from 'lucide-react'
 
 interface Testimonial {
   type: 'user' | 'quote'
@@ -15,87 +15,91 @@ interface TestimonialSectionProps {
   testimonials: Testimonial[]
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
-  },
-}
-
-const stagger = {
-  visible: { transition: { staggerChildren: 0.2 } },
-}
-
-function Avatar({ fallback, src }: { fallback?: string; src?: string }) {
+function StarRating() {
   return (
-    <div className="w-11 h-11 rounded-full bg-navy flex items-center justify-center overflow-hidden flex-shrink-0">
-      {src ? (
-        <img src={src} alt={fallback} className="w-full h-full object-cover" />
-      ) : (
-        <span className="text-gold font-display font-semibold text-sm">{fallback}</span>
-      )}
+    <div className="flex gap-0.5 mb-3">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
+      ))}
     </div>
   )
 }
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
-  if (testimonial.type === 'quote') {
-    return (
-      <motion.div
-        variants={fadeUp}
-        className="col-span-1 md:col-span-2 lg:col-span-3 bg-navy rounded-2xl p-8 text-center border border-gold/20 hover:border-gold/60 transition-colors duration-300 cursor-default"
-      >
-        <Quote className="w-8 h-8 text-gold mx-auto mb-4" />
-        <p className="text-cream font-display italic text-xl leading-relaxed">
-          "{testimonial.quote}"
-        </p>
-      </motion.div>
-    )
-  }
-
   return (
-    <motion.div
-      variants={fadeUp}
-      whileHover={{ y: -4 }}
-      className="bg-cream rounded-2xl p-6 border border-transparent hover:border-gold/40 hover:shadow-xl transition-all duration-300 cursor-default"
-      style={{ background: '#FDFAF4' }}
-    >
-      <Quote className="w-6 h-6 text-gold mb-4 opacity-60" />
-      <p className="text-dark/80 font-body text-sm leading-relaxed mb-6">
+    <div className="flex-shrink-0 w-72 bg-white rounded-2xl p-6 border border-gold/15 shadow-sm mx-3 flex flex-col gap-3 cursor-default select-none">
+      <StarRating />
+      <Quote className="w-5 h-5 text-gold/50" />
+      <p className="font-body text-dark/75 text-sm leading-relaxed flex-1">
         "{testimonial.quote}"
       </p>
-      <div className="flex items-center gap-3">
-        <Avatar fallback={testimonial.avatarFallback} src={testimonial.avatarSrc} />
+      <div className="flex items-center gap-3 pt-2 border-t border-gold/10">
+        <div className="w-9 h-9 rounded-full bg-navy flex items-center justify-center flex-shrink-0">
+          <span className="text-gold font-display font-semibold text-xs">
+            {testimonial.avatarFallback}
+          </span>
+        </div>
         <div>
-          <p className="font-body font-semibold text-dark text-sm">{testimonial.name}</p>
-          <p className="font-body text-teal text-xs">{testimonial.role}</p>
+          <p className="font-body font-semibold text-dark text-sm leading-none">{testimonial.name}</p>
+          <p className="font-body text-teal text-xs mt-0.5">{testimonial.role}</p>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 export function TestimonialSection({ title, testimonials }: TestimonialSectionProps) {
+  const userTestimonials = testimonials.filter((t) => t.type === 'user')
+  // Triple the array so the loop is seamless across all screen sizes
+  const track = [...userTestimonials, ...userTestimonials, ...userTestimonials]
+
   return (
-    <motion.div
-      variants={stagger}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
+    <div>
       <motion.h2
-        variants={fadeUp}
-        className="text-3xl md:text-4xl font-display font-bold text-center text-navy mb-12"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl md:text-4xl font-display font-bold text-center text-navy mb-4"
       >
         {title}
       </motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {testimonials.map((t, i) => (
-          <TestimonialCard key={i} testimonial={t} />
-        ))}
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="text-center font-body text-dark/50 text-sm mb-12"
+      >
+        Trusted by students worldwide
+      </motion.p>
+
+      {/* Marquee wrapper */}
+      <div className="relative overflow-hidden">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-cream to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-cream to-transparent z-10 pointer-events-none" />
+
+        <div
+          className="flex"
+          style={{
+            animation: 'marquee 30s linear infinite',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.animationPlayState = 'paused')}
+          onMouseLeave={(e) => (e.currentTarget.style.animationPlayState = 'running')}
+        >
+          {track.map((t, i) => (
+            <TestimonialCard key={i} testimonial={t} />
+          ))}
+        </div>
       </div>
-    </motion.div>
+
+      <style>{`
+        @keyframes marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(calc(-100% / 3)); }
+        }
+      `}</style>
+    </div>
   )
 }

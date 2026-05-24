@@ -126,14 +126,12 @@ export default function Services() {
       <div className="bg-white border-b border-navy/10">
         <div className="max-w-4xl mx-auto px-6 py-4 flex flex-wrap items-center justify-center gap-3">
           {[
-            { label: 'English', badge: 'A', color: 'bg-navy' },
-            { label: 'Français', badge: 'é', color: 'bg-gold' },
-            { label: 'العربية', badge: 'غ', color: 'bg-teal', rtl: true },
+            { flag: '🇬🇧', label: 'English' },
+            { flag: '🇫🇷', label: 'Français' },
+            { flag: '🇦🇪', label: 'العربية', rtl: true },
           ].map((lang) => (
             <span key={lang.label} className="flex items-center gap-2 font-body text-sm text-dark/70">
-              <span className={`w-6 h-6 rounded-full ${lang.color} flex items-center justify-center text-white text-xs font-bold`}>
-                {lang.badge}
-              </span>
+              <span className="text-lg leading-none">{lang.flag}</span>
               <span dir={lang.rtl ? 'rtl' : undefined}>{lang.label}</span>
             </span>
           ))}
