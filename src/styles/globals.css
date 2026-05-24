@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-cream text-dark antialiased;
+    cursor: none;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+}
+
+/* Custom cursor */
+.custom-cursor {
+  width: 10px;
+  height: 10px;
+  background: #C9973A;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+  mix-blend-mode: multiply;
+}
+
+.custom-cursor.hovering {
+  width: 20px;
+  height: 20px;
+  background: #C9973A;
+  opacity: 0.7;
+}
+
+/* WhatsApp pulse animation */
+@keyframes wa-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(201, 151, 58, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(201, 151, 58, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 151, 58, 0);
+  }
+}
+
+.wa-pulse {
+  animation: wa-pulse 2s infinite;
+}
+
+/* Gold progress bar */
+@keyframes goldBar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.gold-progress {
+  animation: goldBar 1.5s ease-out forwards;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FDFAF4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C9973A;
+  border-radius: 3px;
+}
+
+/* Selection color */
+::selection {
+  background: #C9973A;
+  color: #FDFAF4;
+}
