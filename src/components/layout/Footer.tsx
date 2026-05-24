@@ -95,7 +95,15 @@ export default function Footer() {
             © 2025 StudyLift by Angy. All rights reserved.
           </p>
           <p className="font-body text-xs text-cream/40">
-            Dubai, UAE · Online Services Worldwide
+            Built by{' '}
+            <a
+              href="https://imandev.netlify.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold hover:text-gold/80 transition-colors"
+            >
+              imandev
+            </a>
           </p>
         </div>
       </div>
